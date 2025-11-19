@@ -1,0 +1,4 @@
+verbose: true
+log_file: "./logs.txt"
+log_level: "debug"
+
