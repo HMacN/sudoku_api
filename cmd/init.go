@@ -71,9 +71,6 @@ func initialiseConfig(cmd *cobra.Command) error {
 	}
 
 	fmt.Println("Configuration initialized. Using config file:", viper.ConfigFileUsed())
-	if viper.IsSet(flagVerbose) {
-		fmt.Println("Log output set to verbose mode")
-	}
 	return nil
 }
 
@@ -82,6 +79,7 @@ func initialiseLogger() error {
 	var handlers []slog.Handler
 	isVerbose := viper.IsSet(flagVerbose)
 	if isVerbose {
+		fmt.Println("Log output set to verbose mode")
 		handlers = append(handlers, slog.NewTextHandler(os.Stdout, nil))
 	}
 
