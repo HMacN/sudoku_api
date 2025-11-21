@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"sudoku_api/app"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -26,7 +27,12 @@ var rootCmd = &cobra.Command{
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return nil
+		app, err := app.NewApp()
+		if err != nil {
+			return errors.Wrap(err, "failed to initialise app")
+		}
+
+		return app.Run()
 	},
 }
 
