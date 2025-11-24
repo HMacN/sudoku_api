@@ -9,7 +9,7 @@ import (
 )
 
 type App struct {
-	presentationLayer *presentation.SudokuHandler
+	presentationLayer *presentation.SudokuServer
 	businessLayer     *business.SudokuService
 	persistenceLayer  *persistence.DataService
 }
@@ -20,8 +20,8 @@ func NewApp() (*App, error) {
 	busLayer := business.NewSudokuService()
 	busLayer.SetDataService(persLayer)
 
-	presLayer := presentation.NewSudokuHandler()
-	presLayer.SetBusinessLayer(busLayer)
+	presLayer := presentation.NewSudokuServer()
+	presLayer.SetSudokuService(busLayer)
 
 	return &App{
 		presentationLayer: presLayer,
@@ -31,7 +31,7 @@ func NewApp() (*App, error) {
 }
 
 func (app *App) Run() error {
-	err := app.presentationLayer.RunServer()
+	err := app.presentationLayer.Run()
 	if err != nil {
 		return errors.Wrap(err, "encountered error while running the presentation layer")
 	}
