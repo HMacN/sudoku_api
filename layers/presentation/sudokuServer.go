@@ -16,8 +16,8 @@ type SudokuServer struct {
 
 func NewSudokuServer() *SudokuServer {
 	mux := http.NewServeMux()
-	mux.Handle("/solve", &handlers.SolveHandler{})
-	mux.Handle("/solve/", &handlers.SolveHandler{})
+	mux.Handle("POST /v1/solve", &handlers.SolveHandler{})
+	mux.Handle("POST /v1/solve/", &handlers.SolveHandler{})
 
 	return &SudokuServer{
 		mux: mux,

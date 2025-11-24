@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "1d98aa66-707d-4d2f-a123-3bdafd2135f1",
+		"name": "Sudoku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48653803",
+		"_collection_link": "https://hmacn-8ee177a0-4405055.postman.co/workspace/Hugh-MacNally's-Workspace~226ae259-db07-411c-8bcd-7e9e7bee05f3/collection/48653803-1d98aa66-707d-4d2f-a123-3bdafd2135f1?action=share&source=collection_link&creator=48653803"
+	},
+	"item": [
+		{
+			"name": "Solve",
+			"item": [
+				{
+					"name": "Happy Path",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{version}}/solve",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{version}}",
+								"solve"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
