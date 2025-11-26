@@ -1,0 +1,65 @@
+{
+  "info": {
+    "_postman_id": "1d98aa66-707d-4d2f-a123-3bdafd2135f1",
+    "name": "Sudoku",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "48653803",
+    "_collection_link": "https://hmacn-8ee177a0-4405055.postman.co/workspace/226ae259-db07-411c-8bcd-7e9e7bee05f3/collection/48653803-1d98aa66-707d-4d2f-a123-3bdafd2135f1?action=share&source=collection_link&creator=48653803"
+  },
+  "item": [
+    {
+      "name": "Solve",
+      "item": [
+        {
+          "name": "Happy Path",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a87033b6-1d88-4930-aa14-a825c5cb80d3",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response body is present\", function () {\r",
+                  "    pm.response.to.have.body;\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "4e327eff-938b-42f0-9f2d-5d5f055cc408",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/{{version}}/solve",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "{{version}}",
+                "solve"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "6691dcab-02c6-4414-bf9c-63aa37d580ba"
+    }
+  ]
+}

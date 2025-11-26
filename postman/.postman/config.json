@@ -1,0 +1,16 @@
+{
+  "workspace": {
+    "id": "226ae259-db07-411c-8bcd-7e9e7bee05f3"
+  },
+  "entities": {
+    "collections": [
+      "..\\postman\\collections\\Sudoku.postman_collection.json"
+    ],
+    "environments": [
+      "..\\postman\\environments\\Sudoku.postman_environment.json"
+    ],
+    "specs": [],
+    "flows": [],
+    "globals": []
+  }
+}
