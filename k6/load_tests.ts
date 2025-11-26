@@ -14,7 +14,7 @@ export const options = {
 
 export default function () {
     // Make a GET request to the target URL
-    http.post('http://localhost:8080/solve');
+    http.post('http://localhost:8080/v1/solve');
 
     console.log("Running...");
 

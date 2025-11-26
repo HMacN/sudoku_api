@@ -2,9 +2,7 @@
   "info": {
     "_postman_id": "1d98aa66-707d-4d2f-a123-3bdafd2135f1",
     "name": "Sudoku",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "48653803",
-    "_collection_link": "https://hmacn-8ee177a0-4405055.postman.co/workspace/226ae259-db07-411c-8bcd-7e9e7bee05f3/collection/48653803-1d98aa66-707d-4d2f-a123-3bdafd2135f1?action=share&source=collection_link&creator=48653803"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
@@ -26,16 +24,23 @@
                   "    pm.response.to.have.body;\r",
                   "});"
                 ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "ef58b052-005e-4a43-afe7-96c405bfb93b",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
               }
             }
           ],
           "id": "4e327eff-938b-42f0-9f2d-5d5f055cc408",
           "request": {
             "method": "POST",
-            "header": [],
             "body": {
               "mode": "raw",
               "raw": "",
@@ -55,8 +60,7 @@
                 "solve"
               ]
             }
-          },
-          "response": []
+          }
         }
       ],
       "id": "6691dcab-02c6-4414-bf9c-63aa37d580ba"
