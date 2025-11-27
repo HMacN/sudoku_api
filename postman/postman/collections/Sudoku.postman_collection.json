@@ -51,12 +51,12 @@
               }
             },
             "url": {
-              "raw": "{{baseUrl}}/{{version}}/solve",
+              "raw": "{{baseUrl}}/v1/solve",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
-                "{{version}}",
+                "v1",
                 "solve"
               ]
             }
