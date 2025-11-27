@@ -1,3 +1,9 @@
+// swagger:operation POST /v1/solve string Solve
+// Returns a placeholder string (for now)
+// ---
+// responses:
+//
+//	200: Placeholder
 package handlers
 
 import "net/http"

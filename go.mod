@@ -1,8 +1,8 @@
 module sudoku_api
 
-go 1.23.0
+go 1.24.0
 
-toolchain go1.23.6
+toolchain go1.24.10
 
 require (
 	github.com/pkg/errors v0.9.1
