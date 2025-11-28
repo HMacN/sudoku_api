@@ -8,8 +8,8 @@ package handlers
 
 import "net/http"
 
-type SolveHandler struct{}
+type Solve struct{}
 
-func (s *SolveHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (s *Solve) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Placeholder"))
 }
