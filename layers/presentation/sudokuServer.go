@@ -14,9 +14,6 @@ type SudokuServer struct {
 	businessLayer sudokuService
 }
 
-// TODO: Implement this lot https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/
-// TODO: Look into this: https://swagger.io/docs/#
-
 func NewSudokuServer() *SudokuServer {
 	mux := http.NewServeMux()
 	mux.Handle("POST /v1/solve", &handlers.SolveHandler{})
