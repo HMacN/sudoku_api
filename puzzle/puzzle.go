@@ -4,8 +4,8 @@ type Puzzle struct {
 	board [9][9]uint8
 }
 
-func (p *Puzzle) New(board [9][9]uint8) {
-	p.board = board
+func New(board [9][9]uint8) Puzzle {
+	return Puzzle{board}
 }
 
 func (p *Puzzle) IsValid() bool {
@@ -18,7 +18,23 @@ func (p *Puzzle) IsValid() bool {
 		}
 	}
 
-	// TODO: Also check validity of 3x3 "boxes" of cells.
+	if !isValidSet(p.getBox(0, 0)) {
+		return false
+	}
+	if !isValidSet(p.getBox(3, 0)) {
+		return false
+	}
+	if !isValidSet(p.getBox(6, 0)) {
+		return false
+	}
+
+	for i := 0; i <= 6; i = i + 3 {
+		for j := 0; j <= 6; j = j + 3 {
+			if !isValidSet(p.getBox(i, j)) {
+				return false
+			}
+		}
+	}
 
 	return true
 }
@@ -33,6 +49,16 @@ func (p *Puzzle) getColumn(index int) [9]uint8 {
 		col[i] = p.board[i][index]
 	}
 	return col
+}
+
+func (p *Puzzle) getBox(topLeftCellRow int, topLeftCellCol int) [9]uint8 {
+	box := [9]uint8{}
+	for i := topLeftCellRow; i < 3; i++ {
+		for j := topLeftCellCol; j < 3; j++ {
+			box[i] = p.board[i][j]
+		}
+	}
+	return box
 }
 
 func isValidSet(givenSet [9]uint8) bool {
