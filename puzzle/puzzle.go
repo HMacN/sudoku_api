@@ -39,11 +39,11 @@ func (p *Puzzle) IsValid() bool {
 	return true
 }
 
-func (p *Puzzle) getRow(index int) [9]uint8 {
+func (p *Puzzle) getColumn(index int) [9]uint8 {
 	return p.board[index]
 }
 
-func (p *Puzzle) getColumn(index int) [9]uint8 {
+func (p *Puzzle) getRow(index int) [9]uint8 {
 	col := [9]uint8{}
 	for i := 0; i < 9; i++ {
 		col[i] = p.board[i][index]
@@ -52,10 +52,12 @@ func (p *Puzzle) getColumn(index int) [9]uint8 {
 }
 
 func (p *Puzzle) getBox(topLeftCellRow int, topLeftCellCol int) [9]uint8 {
+	index := 0
 	box := [9]uint8{}
 	for i := topLeftCellRow; i < 3; i++ {
 		for j := topLeftCellCol; j < 3; j++ {
-			box[i] = p.board[i][j]
+			box[index] = p.board[i][j]
+			index++
 		}
 	}
 	return box
