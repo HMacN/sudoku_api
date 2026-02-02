@@ -68,6 +68,23 @@ func TestPuzzle_IsValid_ReturnsTrueForSolvedBoard(t *testing.T) {
 	assert.True(t, h.Puzzle.IsValid(), "this puzzle should be valid")
 }
 
+func TestPuzzle_IsValid_ReturnsTrueForPartialBoard(t *testing.T) {
+	// arrange
+	h := newHelper()
+
+	// act
+	h.SolvedBoard[0][2] = 0
+	h.SolvedBoard[1][2] = 0
+	h.SolvedBoard[0][1] = 0
+	h.SolvedBoard[1][1] = 0
+	h.SolvedBoard[2][0] = 0
+	h.SolvedBoard[2][1] = 0
+	h.Puzzle = New(h.SolvedBoard)
+
+	// assert
+	assert.True(t, h.Puzzle.IsValid(), "this puzzle should be valid")
+}
+
 func TestPuzzle_IsValid_ReturnsTrueForEmptyBoard(t *testing.T) {
 	// arrange
 	h := newHelper()
