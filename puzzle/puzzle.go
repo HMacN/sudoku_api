@@ -18,16 +18,6 @@ func (p *Puzzle) IsValid() bool {
 		}
 	}
 
-	if !isValidSet(p.getBox(0, 0)) {
-		return false
-	}
-	if !isValidSet(p.getBox(3, 0)) {
-		return false
-	}
-	if !isValidSet(p.getBox(6, 0)) {
-		return false
-	}
-
 	for i := 0; i <= 6; i = i + 3 {
 		for j := 0; j <= 6; j = j + 3 {
 			if !isValidSet(p.getBox(i, j)) {
