@@ -9,6 +9,8 @@ import (
 	"github.com/spf13/viper"
 )
 
+// TODO: https://uber-go.github.io/fx/get-started/minimal.html
+
 type SudokuServer struct {
 	mux           *http.ServeMux
 	businessLayer sudokuService
