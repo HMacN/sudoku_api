@@ -1,40 +1,24 @@
 package app
 
 import (
-	"sudoku_api/layers/business"
-	"sudoku_api/layers/persistence"
-	"sudoku_api/layers/presentation"
+	http2 "net/http"
+	"sudoku_api/services/http"
 
-	"github.com/pkg/errors"
+	"go.uber.org/fx"
 )
 
-type App struct {
-	presentationLayer *presentation.SudokuServer
-	businessLayer     *business.SudokuService
-	persistenceLayer  *persistence.DataService
-}
+type App struct{}
 
 func NewApp() (*App, error) {
-	persLayer := persistence.NewDataService()
-
-	busLayer := business.NewSudokuService()
-	busLayer.SetDataService(persLayer)
-
-	presLayer := presentation.NewSudokuServer()
-	presLayer.SetSudokuService(busLayer)
-
-	return &App{
-		presentationLayer: presLayer,
-		businessLayer:     busLayer,
-		persistenceLayer:  persLayer,
-	}, nil
+	return &App{}, nil
 }
 
 func (app *App) Run() error {
-	err := app.presentationLayer.Run()
-	if err != nil {
-		return errors.Wrap(err, "encountered error while running the presentation layer")
-	}
-
-	return nil
+	return fx.New(
+		fx.Provide(
+			http.NewServer,
+			http.NewServeMux,
+		),
+		fx.Invoke(func(server *http2.Server) {}),
+	).Err()
 }
