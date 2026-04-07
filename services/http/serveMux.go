@@ -2,13 +2,13 @@ package http
 
 import (
 	"net/http"
-	"sudoku_api/layers/presentation/handlers"
+	handlers2 "sudoku_api/handlers"
 )
 
 func NewServeMux() *http.ServeMux {
 	mux := http.NewServeMux()
-	mux.Handle("GET /healthy", &handlers.Healthy{})  // TODO: Add handler as separate dependency
-	mux.Handle("POST /v1/solve", &handlers.Solve{})  // TODO: Add handler as separate dependency
-	mux.Handle("POST /v1/solve/", &handlers.Solve{}) // TODO: Add handler as separate dependency
+	mux.Handle("GET /healthy", &handlers2.Healthy{})  // TODO: Add handler as separate dependency
+	mux.Handle("POST /v1/solve", &handlers2.Solve{})  // TODO: Add handler as separate dependency
+	mux.Handle("POST /v1/solve/", &handlers2.Solve{}) // TODO: Add handler as separate dependency
 	return mux
 }

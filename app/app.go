@@ -14,11 +14,13 @@ func NewApp() (*App, error) {
 }
 
 func (app *App) Run() error {
-	return fx.New(
+	fx.New(
 		fx.Provide(
 			http.NewServer,
 			http.NewServeMux,
 		),
 		fx.Invoke(func(server *http2.Server) {}),
-	).Err()
+	).Run()
+
+	return nil
 }
