@@ -1,8 +1,8 @@
 package app
 
 import (
-	http2 "net/http"
-	"sudoku_api/services/http"
+	"net/http"
+	"sudoku_api/services/server"
 
 	"go.uber.org/fx"
 )
@@ -16,10 +16,10 @@ func NewApp() (*App, error) {
 func (app *App) Run() error {
 	fx.New(
 		fx.Provide(
-			http.NewServer,
-			http.NewServeMux,
+			server.NewServer,
+			server.NewServeMux,
 		),
-		fx.Invoke(func(server *http2.Server) {}),
+		fx.Invoke(func(server *http.Server) {}),
 	).Run()
 
 	return nil
