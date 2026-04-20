@@ -2,11 +2,15 @@ package cmd
 
 import (
 	"fmt"
+	"net/http"
 	"os"
-	"sudoku_api/app"
+	"sudoku_api/services/logging"
+	"sudoku_api/services/server"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
+	"go.uber.org/fx"
+	"go.uber.org/fx/fxevent"
 )
 
 var rootCmd = &cobra.Command{
@@ -24,19 +28,29 @@ var rootCmd = &cobra.Command{
 			return errors.Wrap(err, "failed to initialise logger")
 		}
 
+		loggingService, fxLogger := logging.NewLogger()
+		fakeLoggingConstructor := func() logging.LogWrapper { return loggingService }
+		app = fx.New(
+			fx.WithLogger(func() fxevent.Logger { return fxLogger }),
+			fx.Provide(
+				server.NewServer,
+				server.NewServeMux,
+				fakeLoggingConstructor,
+			),
+			fx.Invoke(func(server *http.Server) {}),
+		)
+
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		app, err := app.NewApp()
-		if err != nil {
-			return errors.Wrap(err, "failed to initialise app")
-		}
-
-		return app.Run()
+		err := app.Err()
+		app.Run()
+		return err
 	},
 }
 
 func Execute() {
+	// TODO: Experiment and find out how running sub commands will interact with Fx
 	if err := rootCmd.Execute(); err != nil {
 		_, _ = fmt.Fprintf(os.Stderr, "An error while executing command '%s': error='%s'\n", rootCmd.Use, err)
 		os.Exit(1)

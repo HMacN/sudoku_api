@@ -11,6 +11,12 @@ import (
 type logger struct {
 }
 
+func NewLogger() (LogWrapper, FxLogger) {
+	// TODO: Move this into init.initialiseLogger()
+	l := &logger{}
+	return l, l
+}
+
 func (*logger) LogDebug(format string, v ...interface{}) {
 	slog.Debug(fmt.Sprintf(format, v...))
 }
@@ -38,11 +44,6 @@ func (*logger) LogEvent(event fxevent.Event) {
 		Logger: slog.Default(),
 	}
 	s.LogEvent(event)
-}
-
-func NewLogger() (LogWrapper, FxLogger) {
-	l := &logger{}
-	return l, l
 }
 
 type LogWrapper interface {

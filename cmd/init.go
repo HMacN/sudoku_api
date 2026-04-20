@@ -10,6 +10,7 @@ import (
 	"github.com/samber/slog-multi"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"go.uber.org/fx"
 )
 
 const (
@@ -22,6 +23,7 @@ const (
 var (
 	cfgFile string
 	logger  *slog.Logger
+	app     *fx.App
 )
 
 func init() {
@@ -70,7 +72,7 @@ func initialiseConfig(cmd *cobra.Command) error {
 		return errors.Wrap(err, "failed to bind flags")
 	}
 
-	fmt.Println("Configuration initialized. Using config file:", viper.ConfigFileUsed())
+	fmt.Println("Configuration initialised. Using config file:", viper.ConfigFileUsed())
 	return nil
 }
 
@@ -113,7 +115,9 @@ func initialiseLogger() error {
 	case "ERROR":
 		logLevel = slog.LevelError
 		break
-	default: // Do nothing
+	default:
+		logLevel = slog.LevelInfo
+		break
 	}
 
 	logger = slog.New(slogmulti.Fanout(handlers...))
