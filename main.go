@@ -29,5 +29,8 @@ import (
 )
 
 func main() {
+	// TODO: Move Fx into here?
+	// TODO: Cobra refactor as per https://cobra.dev/docs/tutorials/12-factor-app/
+
 	cmd.Execute()
 }
