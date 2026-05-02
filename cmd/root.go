@@ -29,13 +29,13 @@ var rootCmd = &cobra.Command{
 		}
 
 		loggingService, fxLogger := logging.NewLogger()
-		fakeLoggingConstructor := func() logging.LogWrapper { return loggingService }
+		loggerProvider := func() logging.LogWrapper { return loggingService }
 		app = fx.New(
 			fx.WithLogger(func() fxevent.Logger { return fxLogger }),
 			fx.Provide(
 				server.NewServer,
 				server.NewServeMux,
-				fakeLoggingConstructor,
+				loggerProvider,
 			),
 			fx.Invoke(func(server *http.Server) {}),
 		)
@@ -50,7 +50,6 @@ var rootCmd = &cobra.Command{
 }
 
 func Execute() {
-	// TODO: Experiment and find out how running sub commands will interact with Fx
 	if err := rootCmd.Execute(); err != nil {
 		_, _ = fmt.Fprintf(os.Stderr, "An error while executing command '%s': error='%s'\n", rootCmd.Use, err)
 		os.Exit(1)

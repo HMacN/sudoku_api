@@ -52,7 +52,7 @@ func initialiseConfig(cmd *cobra.Command) error {
 	if cfgFile != "" {
 		viper.SetConfigFile(cfgFile)
 	} else {
-		// Search for a config file with the name "config" (without extension).
+		// Search for a config file with the name "config.yaml".
 		viper.AddConfigPath(".")
 		viper.SetConfigName("config")
 		viper.SetConfigType("yaml")
