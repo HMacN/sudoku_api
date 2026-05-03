@@ -54,7 +54,7 @@ var rootCmd = &cobra.Command{
 }
 
 var exampleChildCommand = &cobra.Command{
-	Use: "a",
+	Use: "ChildCommand",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		logger.Info("start ChildCommand")
 		time.Sleep(100 * time.Millisecond)
@@ -64,7 +64,7 @@ var exampleChildCommand = &cobra.Command{
 }
 
 var exampleGrandchildCommand = &cobra.Command{
-	Use: "b",
+	Use: "GrandchildCommand",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		logger.Info("start GrandchildCommand")
 		time.Sleep(100 * time.Millisecond)
