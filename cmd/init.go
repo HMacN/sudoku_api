@@ -41,7 +41,8 @@ func init() {
 	//	read.FlagReadFilename.Usage)
 
 	// Add subcommands
-	//rootCmd.AddCommand(read.Cmd)
+	rootCmd.AddCommand(exampleChildCommand)
+	exampleChildCommand.AddCommand(exampleGrandchildCommand)
 }
 
 func initialiseConfig(cmd *cobra.Command) error {

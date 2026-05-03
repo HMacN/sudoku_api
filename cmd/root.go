@@ -6,6 +6,7 @@ import (
 	"os"
 	"sudoku_api/services/logging"
 	"sudoku_api/services/server"
+	"time"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -43,9 +44,32 @@ var rootCmd = &cobra.Command{
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		err := app.Err()
+		initErr := app.Err()
+		if initErr != nil {
+			return initErr
+		}
 		app.Run()
-		return err
+		return nil
+	},
+}
+
+var exampleChildCommand = &cobra.Command{
+	Use: "a",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		logger.Info("start ChildCommand")
+		time.Sleep(100 * time.Millisecond)
+		logger.Info("end ChildCommand")
+		return nil
+	},
+}
+
+var exampleGrandchildCommand = &cobra.Command{
+	Use: "b",
+	RunE: func(cmd *cobra.Command, args []string) error {
+		logger.Info("start GrandchildCommand")
+		time.Sleep(100 * time.Millisecond)
+		logger.Info("end GrandchildCommand")
+		return nil
 	},
 }
 
