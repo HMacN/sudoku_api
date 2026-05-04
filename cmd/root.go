@@ -2,9 +2,9 @@ package cmd
 
 import (
 	"fmt"
-	"net/http"
 	"os"
 	"sudoku_api/services/command_hooks/example"
+	"sudoku_api/services/command_hooks/run_server"
 	"sudoku_api/services/logging"
 	"sudoku_api/services/server"
 
@@ -37,9 +37,9 @@ var rootCmd = &cobra.Command{
 				server.NewServer,
 				server.NewServeMux,
 				example.NewService,
+				run_server.NewAsServerCommand,
 				loggerProvider,
 			),
-			fx.Invoke(func(server *http.Server) {}),
 		)
 
 		return nil
@@ -59,16 +59,4 @@ func Execute() {
 		_, _ = fmt.Fprintf(os.Stderr, "An error while executing command '%s': error='%s'\n", rootCmd.Use, err)
 		os.Exit(1)
 	}
-}
-
-func NewFxCommand() *FxCommand {
-	cmd := cobra.Command{}
-	cmd.RunE = func(cmd *cobra.Command, args []string) error {
-		return nil
-	}
-	return &FxCommand{command: cmd}
-}
-
-type FxCommand struct {
-	command cobra.Command
 }

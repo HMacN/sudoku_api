@@ -6,6 +6,7 @@ import (
 	"os"
 	"strings"
 	"sudoku_api/services/command_hooks/example"
+	"sudoku_api/services/command_hooks/run_server"
 
 	"github.com/pkg/errors"
 	"github.com/samber/slog-multi"
@@ -35,8 +36,11 @@ func init() {
 	rootCmd.PersistentFlags().StringP(flagLogFile, "o", "", "log file path and name (default name and location: ./logs.txt)")
 
 	// Add subcommands
-	// TODO: Add subcommand for running as a server, and add flags for port number, &c.
 	rootCmd.AddCommand(example.NewCommand())
+
+	// Run as server subcommand
+	runAsServer := run_server.NewAsServerCommand()
+	rootCmd.AddCommand(runAsServer)
 }
 
 func initialiseConfig(cmd *cobra.Command) error {
