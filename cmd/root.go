@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"sudoku_api/services/example"
+	"sudoku_api/services/command_hooks/example"
 	"sudoku_api/services/logging"
 	"sudoku_api/services/server"
 

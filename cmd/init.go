@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"os"
 	"strings"
-	"sudoku_api/services/example"
+	"sudoku_api/services/command_hooks/example"
 
 	"github.com/pkg/errors"
 	"github.com/samber/slog-multi"

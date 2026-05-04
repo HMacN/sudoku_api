@@ -11,9 +11,8 @@ architecture.
 var singleton *Service
 
 func NewService(logger logging.LogWrapper) *Service {
-	service := &Service{logger: logger}
-	singleton = service
-	return service
+	singleton = &Service{logger: logger}
+	return singleton
 }
 
 type Service struct {
