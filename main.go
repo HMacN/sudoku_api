@@ -22,6 +22,7 @@
 //	  type: basic
 //
 // swagger:meta
+// TODO: Revisit if Swagger is the right choice here.
 package main
 
 import (
@@ -29,8 +30,5 @@ import (
 )
 
 func main() {
-	// TODO: Move Fx into here?
-	// TODO: Cobra refactor as per https://cobra.dev/docs/tutorials/12-factor-app/
-
 	cmd.Execute()
 }

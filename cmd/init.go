@@ -5,6 +5,7 @@ import (
 	"log/slog"
 	"os"
 	"strings"
+	"sudoku_api/services/example"
 
 	"github.com/pkg/errors"
 	"github.com/samber/slog-multi"
@@ -33,16 +34,9 @@ func init() {
 	rootCmd.PersistentFlags().StringP(flagLogLevel, "l", "info", "log level")
 	rootCmd.PersistentFlags().StringP(flagLogFile, "o", "", "log file path and name (default name and location: ./logs.txt)")
 
-	// Local flags for specific commands
-	//read.Cmd.PersistentFlags().StringP(
-	//	read.FlagReadFilename.Name,
-	//	read.FlagReadFilename.Shorthand,
-	//	read.FlagReadFilename.Default,
-	//	read.FlagReadFilename.Usage)
-
 	// Add subcommands
-	rootCmd.AddCommand(exampleChildCommand)
-	exampleChildCommand.AddCommand(exampleGrandchildCommand)
+	// TODO: Add subcommand for running as a server, and add flags for port number, &c.
+	rootCmd.AddCommand(example.NewCommand())
 }
 
 func initialiseConfig(cmd *cobra.Command) error {

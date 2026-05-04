@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"sudoku_api/services/example"
 	"sudoku_api/services/logging"
 	"sudoku_api/services/server"
-	"time"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -36,6 +36,7 @@ var rootCmd = &cobra.Command{
 			fx.Provide(
 				server.NewServer,
 				server.NewServeMux,
+				example.NewService,
 				loggerProvider,
 			),
 			fx.Invoke(func(server *http.Server) {}),
@@ -53,29 +54,21 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-var exampleChildCommand = &cobra.Command{
-	Use: "ChildCommand",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		logger.Info("start ChildCommand")
-		time.Sleep(100 * time.Millisecond)
-		logger.Info("end ChildCommand")
-		return nil
-	},
-}
-
-var exampleGrandchildCommand = &cobra.Command{
-	Use: "GrandchildCommand",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		logger.Info("start GrandchildCommand")
-		time.Sleep(100 * time.Millisecond)
-		logger.Info("end GrandchildCommand")
-		return nil
-	},
-}
-
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		_, _ = fmt.Fprintf(os.Stderr, "An error while executing command '%s': error='%s'\n", rootCmd.Use, err)
 		os.Exit(1)
 	}
+}
+
+func NewFxCommand() *FxCommand {
+	cmd := cobra.Command{}
+	cmd.RunE = func(cmd *cobra.Command, args []string) error {
+		return nil
+	}
+	return &FxCommand{command: cmd}
+}
+
+type FxCommand struct {
+	command cobra.Command
 }
