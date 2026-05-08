@@ -2,17 +2,21 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"net"
 	"net/http"
+	"sudoku_api/services/config"
+	"sudoku_api/services/config/config_keys"
 
 	"go.uber.org/fx"
 )
 
 func NewServer(lc fx.Lifecycle, mux *http.ServeMux) *http.Server {
-	server := &http.Server{Addr: ":8080", Handler: mux}
+	addr := fmt.Sprintf(":%d", config.Get[int](config_keys.Port))
+	server := &http.Server{Addr: addr, Handler: mux}
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
-			listener, err := net.Listen("tcp", ":8080") // TODO: Make these configurable.
+			listener, err := net.Listen("tcp", addr)
 			if err != nil {
 				return err
 			}
