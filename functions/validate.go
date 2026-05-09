@@ -1,26 +1,20 @@
-package puzzle
+package functions
 
-type Puzzle struct {
-	board [9][9]uint8
-}
+import "sudoku_api/models"
 
-func New(board [9][9]uint8) Puzzle {
-	return Puzzle{board}
-}
-
-func (p *Puzzle) IsValid() bool {
+func IsValid(puzzle models.Puzzle) bool {
 	for i := 0; i < 9; i++ {
-		if !isValidSet(p.getRow(i)) {
+		if !isValidSet(getRow(puzzle, i)) {
 			return false
 		}
-		if !isValidSet(p.getColumn(i)) {
+		if !isValidSet(getColumn(puzzle, i)) {
 			return false
 		}
 	}
 
 	for i := 0; i <= 6; i = i + 3 {
 		for j := 0; j <= 6; j = j + 3 {
-			if !isValidSet(p.getBox(i, j)) {
+			if !isValidSet(getBox(puzzle, i, j)) {
 				return false
 			}
 		}
@@ -29,24 +23,24 @@ func (p *Puzzle) IsValid() bool {
 	return true
 }
 
-func (p *Puzzle) getColumn(index int) [9]uint8 {
-	return p.board[index]
+func getColumn(puzzle models.Puzzle, index int) [9]uint8 {
+	return puzzle[index]
 }
 
-func (p *Puzzle) getRow(index int) [9]uint8 {
+func getRow(puzzle models.Puzzle, index int) [9]uint8 {
 	col := [9]uint8{}
 	for i := 0; i < 9; i++ {
-		col[i] = p.board[i][index]
+		col[i] = puzzle[i][index]
 	}
 	return col
 }
 
-func (p *Puzzle) getBox(topLeftCellRow int, topLeftCellCol int) [9]uint8 {
+func getBox(puzzle models.Puzzle, topLeftCellRow int, topLeftCellCol int) [9]uint8 {
 	index := 0
 	box := [9]uint8{}
 	for i := topLeftCellRow; i < 3; i++ {
 		for j := topLeftCellCol; j < 3; j++ {
-			box[index] = p.board[i][j]
+			box[index] = puzzle[i][j]
 			index++
 		}
 	}
