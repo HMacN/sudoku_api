@@ -12,7 +12,7 @@ import (
 )
 
 func NewServer(lc fx.Lifecycle, mux *http.ServeMux) *http.Server {
-	addr := fmt.Sprintf(":%d", config.Get[int](config_keys.Port))
+	addr := fmt.Sprintf(":%d", config.GetInt(config_keys.Port))
 	server := &http.Server{Addr: addr, Handler: mux}
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {

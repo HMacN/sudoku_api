@@ -73,13 +73,13 @@ func initialiseConfig(cmd *cobra.Command) error {
 func initialiseLogger() error {
 
 	var handlers []slog.Handler
-	isVerbose := config.Get[bool](config_keys.Verbose)
+	isVerbose := config.GetBool(config_keys.Verbose)
 	if isVerbose {
 		fmt.Println("Log output set to verbose mode")
 		handlers = append(handlers, slog.NewTextHandler(os.Stdout, nil))
 	}
 
-	logFile := config.Get[string](config_keys.LogFile)
+	logFile := config.GetString(config_keys.LogFile)
 	if logFile != "" {
 		f, err := os.OpenFile(logFile, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
 		if err != nil {
@@ -96,7 +96,7 @@ func initialiseLogger() error {
 	}
 
 	logLevel := slog.LevelInfo
-	switch strings.ToUpper(config.Get[string](config_keys.LogLevel)) {
+	switch strings.ToUpper(config.GetString(config_keys.LogLevel)) {
 	case "DEBUG":
 		logLevel = slog.LevelDebug
 		break
