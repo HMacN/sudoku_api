@@ -5,10 +5,10 @@ import (
 	"log/slog"
 	"os"
 	"strings"
-	"sudoku_api/config"
-	"sudoku_api/config/config_key"
 	"sudoku_api/services/command_hooks/example"
 	"sudoku_api/services/command_hooks/run_server"
+	"sudoku_api/services/config"
+	"sudoku_api/services/config/config_keys"
 
 	"github.com/pkg/errors"
 	"github.com/samber/slog-multi"
@@ -25,10 +25,10 @@ var (
 
 func init() {
 	// Persistent flags available to all commands
-	rootCmd.PersistentFlags().BoolP(string(config_key.Verbose), "v", false, "verbose output (default value: false)")
-	rootCmd.PersistentFlags().StringVarP(&cfgFile, string(config_key.Config), "c", "./config.yaml", "config file path and name (default name and location: ./config.yaml)")
-	rootCmd.PersistentFlags().StringP(string(config_key.LogLevel), "l", "info", "log level")
-	rootCmd.PersistentFlags().StringP(string(config_key.LogFile), "o", "", "log file path and name (default name and location: ./logs.txt)")
+	rootCmd.PersistentFlags().BoolP(config_keys.Verbose.String(), "v", false, "verbose output (default value: false)")
+	rootCmd.PersistentFlags().StringVarP(&cfgFile, config_keys.ConfigurationFile.String(), "c", "./config.yaml", "config file path and name (default name and location: ./config.yaml)")
+	rootCmd.PersistentFlags().StringP(config_keys.LogLevel.String(), "l", "info", "log level")
+	rootCmd.PersistentFlags().StringP(config_keys.LogFile.String(), "o", "", "log file path and name (default name and location: ./logs.txt)")
 
 	// Add subcommands
 	rootCmd.AddCommand(example.NewCommand())
@@ -73,15 +73,14 @@ func initialiseConfig(cmd *cobra.Command) error {
 func initialiseLogger() error {
 
 	var handlers []slog.Handler
-	isVerbose := viper.IsSet(string(config_key.Verbose))
+	isVerbose := config.GetBool(config_keys.Verbose)
 	if isVerbose {
 		fmt.Println("Log output set to verbose mode")
 		handlers = append(handlers, slog.NewTextHandler(os.Stdout, nil))
 	}
 
-	logFile := config.Get(config_key.LogFile)
+	logFile := config.GetString(config_keys.LogFile)
 	if logFile != "" {
-		// TODO: Look up generics (again)!
 		f, err := os.OpenFile(logFile, os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0600)
 		if err != nil {
 			return errors.Wrap(err, "Could not open log file")
@@ -97,7 +96,7 @@ func initialiseLogger() error {
 	}
 
 	logLevel := slog.LevelInfo
-	switch strings.ToUpper(viper.GetString(string(config_key.LogLevel))) {
+	switch strings.ToUpper(config.GetString(config_keys.LogLevel)) {
 	case "DEBUG":
 		logLevel = slog.LevelDebug
 		break

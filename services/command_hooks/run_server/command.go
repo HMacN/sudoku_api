@@ -2,12 +2,9 @@ package run_server
 
 import (
 	"errors"
+	"sudoku_api/services/config/config_keys"
 
 	"github.com/spf13/cobra"
-)
-
-const (
-	flagPort = "port"
 )
 
 func NewAsServerCommand() *cobra.Command {
@@ -23,6 +20,6 @@ func NewAsServerCommand() *cobra.Command {
 			return singleton.RunServer()
 		},
 	}
-	cmd.PersistentFlags().IntP(flagPort, "p", 8080, "the port number for the server to listen on")
+	cmd.PersistentFlags().IntP(config_keys.Port.String(), "p", 8080, "the port number for the server to listen on")
 	return cmd
 }
