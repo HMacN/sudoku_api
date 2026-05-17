@@ -2,6 +2,7 @@
   <configuration default="false" name="go build sudoku_api" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
     <module name="sudoku_api" />
     <working_directory value="$PROJECT_DIR$" />
+    <parameters value="as-server" />
     <kind value="PACKAGE" />
     <package value="sudoku_api" />
     <directory value="$PROJECT_DIR$" />

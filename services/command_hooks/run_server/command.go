@@ -9,12 +9,12 @@ import (
 
 func NewCommand() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "serve",
+		Use:   "as-server",
 		Short: "Run as a server",
 		Long:  "Run as a server",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if singleton == nil {
-				return errors.New("service is not initialized")
+				return errors.New("service is not initialised")
 			}
 
 			return singleton.RunServer()
