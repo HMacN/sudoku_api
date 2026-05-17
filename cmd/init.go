@@ -34,7 +34,7 @@ func init() {
 	rootCmd.AddCommand(example.NewCommand())
 
 	// Run as server subcommand
-	runAsServer := run_server.NewAsServerCommand()
+	runAsServer := run_server.NewCommand()
 	rootCmd.AddCommand(runAsServer)
 }
 

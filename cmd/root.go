@@ -37,7 +37,7 @@ var rootCmd = &cobra.Command{
 				server.NewServer,
 				server.NewServeMux,
 				example.NewService,
-				run_server.NewAsServerCommand,
+				run_server.NewService,
 				loggerProvider,
 			),
 		)

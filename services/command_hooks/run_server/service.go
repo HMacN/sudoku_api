@@ -7,7 +7,7 @@ import (
 
 var singleton *ServerService
 
-func NewServerService(logger logging.LogWrapper, server *http.Server) *ServerService {
+func NewService(logger logging.LogWrapper, server *http.Server) *ServerService {
 	singleton = &ServerService{
 		logger: logger,
 		server: server,
