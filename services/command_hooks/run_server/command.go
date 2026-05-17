@@ -2,7 +2,7 @@ package run_server
 
 import (
 	"errors"
-	"sudoku_api/services/config/config_keys"
+	"sudoku_api/config/config_keys"
 
 	"github.com/spf13/cobra"
 )

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net"
 	"net/http"
-	"sudoku_api/services/config"
-	"sudoku_api/services/config/config_keys"
+	"sudoku_api/config"
+	"sudoku_api/config/config_keys"
 
 	"go.uber.org/fx"
 )

@@ -5,10 +5,10 @@ import (
 	"log/slog"
 	"os"
 	"strings"
+	"sudoku_api/config"
+	"sudoku_api/config/config_keys"
 	"sudoku_api/services/command_hooks/example"
 	"sudoku_api/services/command_hooks/run_server"
-	"sudoku_api/services/config"
-	"sudoku_api/services/config/config_keys"
 
 	"github.com/pkg/errors"
 	"github.com/samber/slog-multi"
