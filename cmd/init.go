@@ -30,12 +30,11 @@ func init() {
 	rootCmd.PersistentFlags().StringP(config_keys.LogLevel.String(), "l", "info", "log level")
 	rootCmd.PersistentFlags().StringP(config_keys.LogFile.String(), "o", "", "log file path and name (default name and location: ./logs.txt)")
 
-	// Add subcommands
+	// Add example subcommand
 	rootCmd.AddCommand(example.NewCommand())
 
 	// Run as server subcommand
-	runAsServer := run_server.NewCommand()
-	rootCmd.AddCommand(runAsServer)
+	rootCmd.AddCommand(run_server.NewCommand())
 }
 
 func initialiseConfig(cmd *cobra.Command) error {

@@ -49,7 +49,7 @@ var rootCmd = &cobra.Command{
 		if initErr != nil {
 			return initErr
 		}
-		app.Run()
+		app.Run() // TODO: Move to PersistentPreRunE?
 		return nil
 	},
 }
