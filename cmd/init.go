@@ -66,6 +66,9 @@ func initialiseConfig(cmd *cobra.Command) error {
 	}
 
 	fmt.Println("Configuration initialised. Using config file:", viper.ConfigFileUsed())
+
+	// TODO: Check if all config values have been finalised by this point.  If so then FX should probably get set up here.
+
 	return nil
 }
 
