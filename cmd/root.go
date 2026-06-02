@@ -3,15 +3,8 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"sudoku_api/services/command_hooks/example"
-	"sudoku_api/services/command_hooks/run_server"
-	"sudoku_api/services/logging"
-	"sudoku_api/services/server"
 
-	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
-	"go.uber.org/fx"
-	"go.uber.org/fx/fxevent"
 )
 
 var rootCmd = &cobra.Command{
@@ -19,37 +12,10 @@ var rootCmd = &cobra.Command{
 	Short: "runs sudoku commands",
 	Long:  "runs sudoku commands",
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-		err := initialiseConfig(cmd)
-		if err != nil {
-			return errors.Wrap(err, "failed to initialise config")
-		}
-
-		err = initialiseLogger()
-		if err != nil {
-			return errors.Wrap(err, "failed to initialise logger")
-		}
-
-		loggingService, fxLogger := logging.NewLogger()
-		loggerProvider := func() logging.LogWrapper { return loggingService }
-		app = fx.New(
-			fx.WithLogger(func() fxevent.Logger { return fxLogger }),
-			fx.Provide(
-				server.NewServer,
-				server.NewServeMux,
-				example.NewService,
-				run_server.NewService,
-				loggerProvider,
-			),
-		)
-
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		initErr := app.Err()
-		if initErr != nil {
-			return initErr
-		}
-		app.Run() // TODO: Move to PersistentPreRunE?
+		// TODO: Does anything want to go in here?
 		return nil
 	},
 }

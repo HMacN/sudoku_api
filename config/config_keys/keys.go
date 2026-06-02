@@ -9,6 +9,10 @@ const (
 	ConfigurationFile
 	LogLevel
 	LogFile
+	KeyExampleOne
+	KeyExampleTwo
+	KeyExampleThree
+	KeyExampleFour
 )
 
 func (k Key) String() string {
@@ -23,6 +27,14 @@ func (k Key) String() string {
 		return "LogLevel"
 	case LogFile:
 		return "LogFile"
+	case KeyExampleOne:
+		return "KeyExampleOne"
+	case KeyExampleTwo:
+		return "KeyExampleTwo"
+	case KeyExampleThree:
+		return "KeyExampleThree"
+	case KeyExampleFour:
+		return "KeyExampleFour"
 	default:
 		return "InvalidKey"
 	}
