@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"context"
 	"fmt"
 	"log/slog"
 	"os"
@@ -10,15 +9,12 @@ import (
 	"sudoku_api/config/config_keys"
 	"sudoku_api/services/command_hooks/example"
 	"sudoku_api/services/command_hooks/run_server"
-	"sudoku_api/services/logging"
-	"sudoku_api/services/server"
 
 	"github.com/pkg/errors"
 	"github.com/samber/slog-multi"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"go.uber.org/fx"
-	"go.uber.org/fx/fxevent"
 )
 
 var (
@@ -53,32 +49,6 @@ func init() {
 		fmt.Println(msg)
 		return
 	}
-
-	// Set up Dependency Injection
-	loggingService, fxLogger := logging.NewLogger()
-	loggerProvider := func() logging.LogWrapper { return loggingService }
-	app = fx.New(
-		fx.WithLogger(func() fxevent.Logger { return fxLogger }),
-		fx.Provide(
-			server.NewServer,
-			server.NewServeMux,
-			example.NewService,
-			run_server.NewService,
-			loggerProvider,
-		),
-		//fx.Invoke()		// TODO: Should there be a long-running function here that is shut down elsewhere?  How will that interact with other long-running functions i.e. servers?
-	)
-	initErr := app.Err()
-	if initErr != nil {
-		msg := fmt.Sprintf("encountered error during dependency injection: %s", initErr.Error())
-		loggingService.LogError(msg)
-		return
-	}
-
-	// TODO: Context?
-	// TODO: Channel here for app shutdown?
-	app.Start(context.Background())
-	app.Done()
 }
 
 func initialiseConfig(cmd *cobra.Command) error {

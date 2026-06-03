@@ -11,11 +11,7 @@ var rootCmd = &cobra.Command{
 	Use:   "sudoku",
 	Short: "runs sudoku commands",
 	Long:  "runs sudoku commands",
-	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-		return nil
-	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		// TODO: Does anything want to go in here?
 		return nil
 	},
 }
