@@ -11,3 +11,5 @@ func NewServeMux() *http.ServeMux {
 	mux.Handle("POST /v1/verify", &handlers.VerifyHandler{}) // TODO: Add handler as separate dependency
 	return mux
 }
+
+// TODO: For OpenAPI Code Generation: https://www.youtube.com/watch?v=9MuEP01h1XU
